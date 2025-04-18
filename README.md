@@ -17,4 +17,4 @@ This is a vehicle parking system for FiveM servers using the ESX framework. Play
 ## Installation
 
 1. Download or clone this repository into your server's `resources` folder.
-2. Add the resource to your `server.cfg`: ```ensure parking```
+2. Add the resource to your `server.cfg`: ```ensure payaso_parking```
