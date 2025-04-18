@@ -19,4 +19,4 @@ Preview: https://streamable.com/ouctp3
 ## Installation
 
 1. Download or clone this repository into your server's `resources` folder.
-2. Add the resource to your `server.cfg`: ```ensure payaso_parking```
+2. Add the resource to your `server.cfg`: ```ensure parking```
