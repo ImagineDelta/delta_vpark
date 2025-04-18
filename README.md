@@ -1,6 +1,6 @@
 # Vehicle Parking System for ESX (FiveM)
 
-This is a vehicle parking system for FiveM servers using the ESX framework. Players can spawn, park, and manage their vehicles with the ability to purchase parking slots. The system includes commands for vehicle spawning, parking.
+This is a GTAW Inspired Vehicle Parking System for FiveM servers using the ESX framework. Players can spawn, park, and manage their vehicles with the ability to purchase parking slots. The system includes commands for vehicle spawning, parking, providing an immersive and user-friendly experience.
 
 ## Features
 - **Vehicle Management:** Players can spawn their owned vehicles and park them.
