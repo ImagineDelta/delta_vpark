@@ -12,6 +12,8 @@ Preview: https://streamable.com/ouctp3
 - **Commands:**
   - `/vget` - Open the vehicle list menu to spawn owned vehicles.
   - `/vg` - Alias for `/vget`.
+  - `/vb` - Alias for `/vbuy`.
+  - `/vbuy` - Purchase's your parking spot.
   - `/vpark` - Park the vehicle you're currently in.
   - `/vp` - Alias for `/vpark`.
   - `/fixveh` - Teleport your vehicle to your current location.

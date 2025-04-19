@@ -4,6 +4,10 @@ local spawnedVehicles = {}
 local hasSpawnSlot = false
 local hasUsedFix = false
 
+RegisterCommand("vb", function()
+    ExecuteCommand("vbuy")
+end, false)
+
 RegisterCommand('vget', function()
     if not hasSpawnSlot then
         lib.notify({ description = "You don't have an available vehicle slot.", type = "error" })
