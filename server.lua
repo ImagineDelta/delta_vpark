@@ -1,7 +1,4 @@
-local ESX = nil
-
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-
+ESX = exports['es_extended']:getSharedObject()
 ESX.RegisterServerCallback('parking:getOwnedVehicles', function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
    
@@ -77,4 +74,22 @@ AddEventHandler('onResourceStart', function(resourceName)
             print('^7Resource started successfully')
         end
     end
+end)
+
+RegisterServerEvent("parking:parkVehicle")
+AddEventHandler("parking:parkVehicle", function(plate, coords, heading, props)
+    local src = source
+    local xPlayer = ESX.GetPlayerFromId(src)
+
+    if not xPlayer then return end
+
+    local position = json.encode({ x = coords.x, y = coords.y, z = coords.z, h = heading })
+    local vehicle = json.encode(props)
+
+    MySQL.update('UPDATE owned_vehicles SET stored = 1, vehicle = ?, parking_data = ? WHERE plate = ? AND owner = ?', {
+        vehicle,        
+        position,      
+        plate,          
+        xPlayer.identifier 
+    })
 end)

@@ -133,43 +133,34 @@ RegisterNetEvent('parking:slotPurchased', function()
     hasSpawnSlot = true
 end)
 
-RegisterCommand('vpark', function()
-    local playerPed = PlayerPedId()
+RegisterCommand("vpark", function()
+    local ped = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(ped, false)
 
-    if not IsPedInAnyVehicle(playerPed, false) then
-        lib.notify({ description = "You must be inside a vehicle to park it.", type = "error" })
+    if vehicle == 0 then 
+        lib.notify({ type = 'error', description = 'You are not in a vehicle!' })
+        return 
+    end
+
+    if GetPedInVehicleSeat(vehicle, -1) ~= ped then
+        lib.notify({ type = 'error', description = 'You must be the driver!' })
         return
     end
 
-    local vehicle = GetVehiclePedIsIn(playerPed, false)
-    local speed = GetEntitySpeed(vehicle)
-    if speed > 0.5 then
-        lib.notify({ description = "Stop the vehicle before parking it.", type = "error" })
-        return
-    end
+    local props = ESX.Game.GetVehicleProperties(vehicle)
+    
+    local plate = GetVehicleNumberPlateText(vehicle)
+    
+    local coords = GetEntityCoords(vehicle)
+    local heading = GetEntityHeading(vehicle)
 
-    local found = false
-    local index = 0
-    for i, v in ipairs(spawnedVehicles) do
-        if v.entity == vehicle then
-            found = true
-            index = i
-            break
-        end
-    end
+    TriggerServerEvent("parking:parkVehicle", plate, coords, heading, props)
 
-    if not found then
-        lib.notify({ description = "You can only park vehicles you've spawned.", type = "error" })
-        return
-    end
+    lib.notify({ type = 'success', description = 'Vehicle parked!' })
 
-    table.remove(spawnedVehicles, index)
     DeleteVehicle(vehicle)
-    hasSpawnSlot = true
-    hasUsedFix = false
+end)
 
-    lib.notify({ description = "Your vehicle has been parked.", type = "success" })
-end, false)
 
 RegisterCommand('vp', function()
     ExecuteCommand('vpark')
